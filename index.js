@@ -62,30 +62,58 @@ function getRandomInt(str, end) {
 
 }
 
-// 陣列(串列)
-//外迴圈(控制組數) =>> 產生五組號碼
-let rows = []
-//let num = prompt("請輸入幾組號碼:")
-for (let j = 0; j < 5; j++) {
-    let numbers = [];
-    // 內迴圈輸出六個號碼到網路上
-    while (true) {
-        let x = getRandomInt(1, 49);
-        if (!numbers.includes(x)) {
-            numbers.push(x);
+function getNumbers(num) {
+    let rows = []
+    //let num = prompt("請輸入幾組號碼:")
+
+    for (let j = 0; j < num; j++) {
+        let numbers = [];
+        // 內迴圈輸出六個號碼到網路上
+        while (true) {
+            let x = getRandomInt(1, 49);
+            if (!numbers.includes(x)) {
+                numbers.push(x);
+
+            }
+            if (numbers.length == 6) {
+                break;
+            }
+            // 使用反引號+${}
+            //document.write(`<h3>第 ${i + 1} 個號碼: ${x} </h3>`);
 
         }
-        if (numbers.length == 6) {
-            break;
-        }
-        // 使用反引號+${}
-        //document.write(`<h3>第 ${i + 1} 個號碼: ${x} </h3>`);
 
+        numbers.sort()
+        rows.push(numbers);
+    }
+    return rows;
+}
+
+
+function getLottroy() {
+    // alert("click!!")
+    const lottroyE1 = document.querySelector("#lottroy");
+    let num = prompt("請輸入幾組號碼:")
+    rows = getNumbers(num);
+    lottroyE1.innerHTML = " ";
+    for (let i = 0; i < rows.length; i++) {
+        result = rows[i].join(" , ")
+        //console.log(result);
+        lottroyE1.innerHTML += `<h3>第 ${i + 1} 組號碼: ${result} </h3><hr></hr>`
+        //document.write(`<h3>第 ${i + 1} 組號碼: ${result} </h3><hr>`)
     }
 
-    numbers.sort()
-    rows.push(numbers);
 }
+
+
+const dateE1 = document.querySelector(".date");
+dateE1.innerText = Date();
+
+
+
+// 陣列(串列)
+//外迴圈(控制組數) =>> 產生五組號碼
+
 
 function compare(a, b) {
     return a - b;
@@ -93,13 +121,7 @@ function compare(a, b) {
 
 console.log(rows);
 
-const lottroyE1 = document.querySelector("#lottroy");
-for (let i = 0; i < rows.length; i++) {
-    result = rows[i].join(" , ")
-    //console.log(result);
-    lottroyE1.innerHTML += `<h3>第 ${i + 1} 組號碼: ${result} </h3><hr></hr>`
-    //document.write(`<h3>第 ${i + 1} 組號碼: ${result} </h3><hr>`)
-}
+
 
 x = "3.5"
 document.write(parseInt(x));
